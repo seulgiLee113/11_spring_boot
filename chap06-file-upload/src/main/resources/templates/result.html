@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 th:text="${ message }"></h1>
+
+    <div th:if="${ img } != null">
+        <img th:src="${ img }" alt="업로드 이미지" width="300" height="300">
+        <p th:text="${ singleFileDescription }"></p>
+    </div>
+    <div th:if="${ imgs } != null">
+        <div th:each="img : ${ imgs }">     <!-- for문 돌리기-->
+            <img th:src="${ img }" alt="업로드 이미지" width="300" height="300">
+        </div>
+        <p th:text="${ multiFileDescription }"></p>
+    </div>
+    <div th:unless="${ img } != null or ${ imgs } != null">
+        <p>보여줄게 없다 미안하다...</p>
+    </div>
+</body>
+</html>

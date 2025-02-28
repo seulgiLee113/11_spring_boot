@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .header {
+            color: red;
+        }
+        .aside {
+            color: darkgreen;
+        }
+        .footer {
+            color : darkmagenta;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+
+    <!--
+        th:replace 는 해당 영역에 존재하는 요소를 대체하고자 하는 Fragment를 호출하여 치환하는 문법으로
+        기존에 정의되어 있던 요소를 제거하고 불러온 Fragment로 치환한다.
+        (즉 굴러 들어온 돌이 박힌 돌을 빼내는 식으로 동작함)
+    -->
+
+    <header th:replace="~{ /common/header :: headerFragment }" class="header">
+        <h1>나는 헤더</h1>
+    </header>
+
+    <h1>4. fragment</h1>
+
+    <!-- fragment 호출 시, 매개변수를 전달해서 동적으로 UI를 꾸미는 것도 가능하다. -->
+    <aside th:replace="~{ /common/aside:: asideFragment(${test1}, ${test2}) }"></aside>
+
+    <main>
+        <article>
+            <section>
+                <h1>여기가 메인이다.</h1>
+            </section>
+        </article>
+    </main>
+
+    <!--
+        th:insert는 해당 영역에 삽입하고자 하는 fragment를 삽입하는 문법으로,
+        블록 내에 정의되어 있는 내용에 th:insert로 불러온 fragment를 그대로 추가한다.
+        따라서 th:replace와 같이 중복되는 요소가 생길 수 있으므로 주의해서 사용하도록 한다.
+        (th:replace와 th:insert 구분이 필요함)
+    -->
+    <footer th:insert="~{ /common/footer :: footerFragment }">
+        <h3>나는 푸터</h3>  <!-- 이 자리에 footer.html의 <footer/>가 들어옴!-->
+    </footer>
+</body>
+</html>

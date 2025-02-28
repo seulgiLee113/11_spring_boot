@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <th:block th:replace="common/header :: myHeader">
+    </th:block>
+
+    <table>
+        <tr>
+            <th>메뉴번호</th>
+            <th>메뉴이름</th>
+            <th>메뉴가격</th>
+            <th>카테고리코드</th>
+            <th>판매상태</th>
+        </tr>
+        <tr th:each="m : ${ menuList }">
+            <td th:text="${ m.code }"></td>
+            <td><a th:text="${ m.name }" th:href="@{ /menu/detail/{code}(code=${m.code}) }"></a></td>
+            <td th:text="${ m.price }"></td>
+            <td th:text="${ m.categoryCode }"></td>
+            <td th:text="${ m.orderableStatus }"></td>
+        </tr>
+    </table>
+    <br>
+    <button onclick="location.href='/'">메인으로</button>
+</body>
+</html>
