@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script th:inline="text">
+        const successMessage = `[[${ successMessage }]]`;
+        if (successMessage) {
+            alert(successMessage);
+        }
+    </script>
 </head>
 <body>
     <th:block th:replace="common/header :: myHeader"></th:block>
@@ -18,5 +24,18 @@
     </div>
 
     <button onclick="location.href='/menu/list'">목록으로</button>
+
+    <!-- 수정 버튼(thymeleaf 문법 사용) -->
+    <a th:href="@{/menu/edit/{code}(code = ${menu.code})}">수정하기(thymeleaf)</a>
+
+    <!-- 수정 버튼(Javascript 문법 사용) -->
+    <button id="editButton">수정하기(javascript)</button>
+
+    <script>
+        document.getElementById("editButton")
+                .addEventListener("click", () => {
+                    window.location.href = "/menu/edit/" + `[[${menu.code}]]`;
+            });
+    </script>
 </body>
 </html>
